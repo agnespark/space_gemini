@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:space_gemini/models/chat_message_model.dart';
 import 'package:space_gemini/utils/constants.dart';
 
-class SpaceRepo {
+class ChatRepo {
   static chatTextGenerationRepo(List<ChatMessageModel> previousMessage) {
     try {
       Dio dio = Dio();
