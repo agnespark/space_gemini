@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:space_gemini/models/chat_message_model.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
@@ -9,5 +9,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<ChatEvent>((event, emit) {
       // TODO: implement event handler
     });
+
+    List<ChatMessageModel> messages = [];
   }
 }
