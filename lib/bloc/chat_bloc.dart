@@ -8,7 +8,7 @@ part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  ChatBloc() : super(ChatInitial()) {
+  ChatBloc() : super(ChatSuccessState(messages: [])) {
     // 이벤트 처리기
     on<ChatGenerateNewTextMessageEvent>(chatGenerateNewTextMessageEvent);
   }
@@ -19,6 +19,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     messages.add(ChatMessageModel(
         role: "user", parts: [ChatPartModel(text: event.inputMessage)]));
     emit(ChatSuccessState(messages: messages));
-    await ChatRepo.chatTextGenerationRepo(messages);
+    String generatedText = await ChatRepo.chatTextGenerationRepo(messages);
+    if (generatedText.isNotEmpty) {
+      messages.add(ChatMessageModel(
+          role: 'model', parts: [ChatPartModel(text: generatedText)]));
+      emit(ChatSuccessState(messages: messages));
+    }
   }
 }
