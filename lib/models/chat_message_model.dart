@@ -19,11 +19,11 @@ class ChatMessageModel {
   factory ChatMessageModel.fromMap(Map<String, dynamic> map) {
     return ChatMessageModel(
       role: map['role'] as String,
-      parts: List<ChatPartModel>.from(
-        (map['parts'] as List<Map<String, dynamic>>).map<ChatPartModel>(
-          (x) => ChatPartModel.fromMap(x),
-        ),
-      ),
+      parts: (map['parts'] as List<Map<String, dynamic>>)
+          .map<ChatPartModel>(
+            (x) => ChatPartModel.fromMap(x),
+          )
+          .toList(),
     );
   }
 
