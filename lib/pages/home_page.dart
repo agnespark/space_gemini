@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:space_gemini/bloc/chat_bloc.dart';
 import 'package:space_gemini/models/chat_message_model.dart';
 
@@ -36,23 +37,24 @@ class _HomePageState extends State<HomePage> {
                       fit: BoxFit.cover),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       height: 100,
-                      child: Row(
+                      child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             "Space Chat",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.image_search),
-                              color: Colors.white)
+                          // IconButton(
+                          //     onPressed: () {},
+                          //     icon: const Icon(Icons.image_search),
+                          //     color: Colors.white)
                         ],
                       ),
                     ),
@@ -89,6 +91,17 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
+                    if (chatBloc.generating)
+                      Row(
+                        children: [
+                          SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: Lottie.asset('assets/loader.json')),
+                          const SizedBox(width: 20),
+                          const Text("Loading...")
+                        ],
+                      ),
                     Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 30, horizontal: 16),
